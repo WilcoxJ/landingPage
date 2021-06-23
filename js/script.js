@@ -12,21 +12,21 @@ camera.position.z = 60
 
 // Materials
 const material = new THREE.MeshStandardMaterial({ 
-      color: 0xdd187e,
-      wireframe: true,
-    });
+		color: 0xdd187e,
+		wireframe: true,
+	});
 material.opacity = .9;
 
 const materialCube = new THREE.MeshStandardMaterial({ 
-      color: 0xdd187e,
-      wireframe: true
-    });
+		color: 0xdd187e,
+		wireframe: true
+	});
 
 const particlesMaterial = new THREE.PointsMaterial({ 
-        size: .012,
-        transparent: true,
-        color: 0x3b78db
-    });
+		size: .012,
+		transparent: true,
+		color: 0x3b78db
+	});
 particlesMaterial.opacity = .7;
 
 
@@ -51,11 +51,9 @@ const cube = new THREE.Mesh( geometry2, materialCube );
 window.addEventListener( 'resize', onWindowResize, false );
 
 function onWindowResize(){            
-
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();            
-
-    renderer.setSize( window.innerWidth, window.innerHeight );            
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();            
+	renderer.setSize( window.innerWidth, window.innerHeight );            
 
 }
 
@@ -66,7 +64,7 @@ const particlesCount = 20000;
 const posArray = new Float32Array(particlesCount * 3);
 
 for(let i = 0; i < particlesCount * 3; i++) {
-    posArray[i] = (math.random() - 0.5) * 180
+	posArray[i] = (math.random() - 0.5) * 180
 }
 
 particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3))
@@ -83,8 +81,8 @@ let mouseX = 0
 let mouseY = 0
 
 function animateParticles(event) {
-  mouseX = event.clientX
-  mouseY = event.clientY
+	mouseX = event.clientX
+	mouseY = event.clientY
 
 }
 
@@ -93,26 +91,26 @@ let scaleSphere = 1
 
 function onDocumentMouseWheel( event ) {
 
-    var fovMAX = 135;
-    var fovMIN = 25;
-    camera.fov -= event.wheelDeltaY * 0.05;
-    camera.fov = Math.max( Math.min( camera.fov, fovMAX ), fovMIN );
-    camera.updateProjectionMatrix();
+	var fovMAX = 135;
+	var fovMIN = 25;
+	camera.fov -= event.wheelDeltaY * 0.05;
+	camera.fov = Math.max( Math.min( camera.fov, fovMAX ), fovMIN );
+	camera.updateProjectionMatrix();
 
 }
 
 const animate = function () {
   requestAnimationFrame( animate );
 
-  // Objects
-    sphere.rotation.y += 0.005
-    cube.rotation.y = mouseX * -.0032
-    cube.rotation.x = mouseY * .0032
+	// Objects
+	sphere.rotation.y += 0.005
+	cube.rotation.y = mouseX * -.0032
+	cube.rotation.x = mouseY * .0032
 
-  // starfield
-  particlesMesh.rotation.y = mouseX * .0012
-  particlesMesh.rotation.x = mouseY * .0012
-  renderer.render( scene, camera );
+	// starfield
+	particlesMesh.rotation.y = mouseX * .0012
+	particlesMesh.rotation.x = mouseY * .0012
+	renderer.render( scene, camera );
 
-};          
+};
 animate();
