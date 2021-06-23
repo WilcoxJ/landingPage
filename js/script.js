@@ -15,11 +15,11 @@ const material = new THREE.MeshStandardMaterial({
       color: 0xdd187e,
       wireframe: true,
     });
-material.opacity = .85;
+material.opacity = .9;
 
 const materialCube = new THREE.MeshStandardMaterial({ 
       color: 0xdd187e,
-      wireframe: true 
+      wireframe: true
     });
 
 const particlesMaterial = new THREE.PointsMaterial({ 
@@ -32,17 +32,18 @@ particlesMaterial.opacity = .7;
 
 
 // Light
-const light = new THREE.HemisphereLight(0xf402bc, 0x236e89, 1);
+const light = new THREE.HemisphereLight(0xf402bc, 0x236e89, .5);
 scene.add(light);
 
-const frontLight = new THREE.DirectionalLight(0xb6ebef, 1);
-frontLight.position.set(3000, 300, 3000).normalize(); // just a direction. you can normalize
+const frontLight = new THREE.DirectionalLight(0xb6ebef, .75);
+frontLight.position.set(3000, 500, 3000).normalize(); // just a direction. you can normalize
 scene.add(frontLight);
 
 //geometry
 const geometry = new THREE.IcosahedronGeometry( 12, 1 );
 const geometry2 = new THREE.BoxGeometry( 30, 30, 30 );
 const sphere = new THREE.Mesh( geometry, material );
+sphere.receiveShadow = true;
 scene.add( sphere );
 
 const cube = new THREE.Mesh( geometry2, materialCube );
@@ -60,12 +61,12 @@ function onWindowResize(){
 
 //particles
 const particleGeometry = new THREE.BufferGeometry;
-const particlesCount = 25000;
+const particlesCount = 20000;
 
 const posArray = new Float32Array(particlesCount * 3);
 
 for(let i = 0; i < particlesCount * 3; i++) {
-    posArray[i] = (math.random() - 0.5) * 160
+    posArray[i] = (math.random() - 0.5) * 180
 }
 
 particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3))
