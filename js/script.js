@@ -41,7 +41,7 @@ scene.add(frontLight);
 
 //geometry
 const geometry = new THREE.IcosahedronGeometry( 12, 1 );
-const geometry2 = new THREE.BoxGeometry( 30, 30, 30 );
+const geometry2 = new THREE.BoxGeometry( 30, 30, 30,);
 const sphere = new THREE.Mesh( geometry, material );
 sphere.receiveShadow = true;
 scene.add( sphere );
