@@ -27,7 +27,7 @@ const particlesMaterial = new THREE.PointsMaterial({
 		transparent: true,
 		color: 0x3b78db
 	});
-particlesMaterial.opacity = 1;
+particlesMaterial.opacity = .70;
 
 
 
