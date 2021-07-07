@@ -34,7 +34,7 @@ const light = new THREE.HemisphereLight(0xf402bc, 0x236e89, .5);
 scene.add(light);
 
 const frontLight = new THREE.DirectionalLight(0xb6ebef, .75);
-frontLight.position.set(3000, 500, 3000).normalize(); // just a direction. you can normalize
+frontLight.position.set(3000, 500, 3000).normalize();
 scene.add(frontLight);
 
 //geometry
@@ -76,7 +76,7 @@ scene.add(particlesMesh)
 
 //mouse
 document.addEventListener('mousemove', animateParticles)
-document.addEventListener('wheel', onDocumentMouseWheel)
+document.addEventListener('wheel', onDocumentMouseWheel) // this breaks in firefox but I'm not sure why
 document.addEventListener('click', onUserClick)
 
 let mouseX = 1228
@@ -91,8 +91,7 @@ function animateParticles(event) {
 let scrollY = 1
 let scaleSphere = 1
 
-function onDocumentMouseWheel( event ) {
-
+function onDocumentMouseWheel(event) {
 	var fovMAX = 135;
 	var fovMIN = 25;
 	camera.fov -= event.wheelDeltaY * 0.05;
@@ -101,12 +100,9 @@ function onDocumentMouseWheel( event ) {
 
 }
 
-function onUserClick( event ) {
+function onUserClick(event) {
 	cube.rotation.y = mouseX * -.0032
 	cube.rotation.x = mouseY * .0032
-
-
-
 }
 
 const animate = function () {
