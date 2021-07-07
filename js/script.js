@@ -70,8 +70,7 @@ particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3)
 
 const particlesMesh = new THREE.Points(particleGeometry, particlesMaterial)
 
-scene.add( cube );
-
+scene.add(cube);
 scene.add(particlesMesh)
 
 //mouse
