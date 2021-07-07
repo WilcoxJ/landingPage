@@ -16,15 +16,15 @@ camera.position.z = 60
 
 // Materials
 
-const material = new THREE.PointsMaterial({ 
-	size: .005
-});
+// const material = new THREE.PointsMaterial({ 
+// 	size: .005
+// });
 
-// const material = new THREE.MeshStandardMaterial({ 
-// 		color: 0xdd187e,
-// 		wireframe: true,
-// 	});
-// material.opacity = .9;
+const material = new THREE.MeshStandardMaterial({ 
+		color: 0xdd187e,
+		wireframe: true,
+	});
+material.opacity = .9;
 
 const materialCube = new THREE.MeshStandardMaterial({ 
 		color: 0xdd187e,
@@ -49,12 +49,14 @@ frontLight.position.set(3000, 500, 3000).normalize(); // just a direction. you c
 scene.add(frontLight);
 
 //geometry
-const geometry = new THREE.TorusGeometry( 13, 5, 25, 100 );
-// const geometry = new THREE.IcosahedronGeometry( 12, 1 );
-const geometry2 = new THREE.IcosahedronGeometry( 12, 1 );
-//const sphere = new THREE.Mesh( geometry, material );
-const sphere = new THREE.Points( geometry, material );
-// sphere.receiveShadow = true;
+// const geometry = new THREE.TorusGeometry( 13, 5, 25, 100 );
+const geometry = new THREE.IcosahedronGeometry( 12, 1 );
+const geometry2 = new THREE.BoxGeometry( 30, 30, 30,);
+const sphere = new THREE.Mesh( geometry, material );
+
+//torus
+// const sphere = new THREE.Points( geometry, material );
+sphere.receiveShadow = true;
 scene.add( sphere );
 
 const cube = new THREE.Mesh( geometry2, materialCube );
@@ -82,7 +84,7 @@ particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3)
 
 const particlesMesh = new THREE.Points(particleGeometry, particlesMaterial)
 
-// scene.add( cube );
+scene.add( cube );
 
 scene.add(particlesMesh)
 
@@ -91,8 +93,8 @@ document.addEventListener('mousemove', animateParticles)
 document.addEventListener('wheel', onDocumentMouseWheel)
 document.addEventListener('click', onUserClick)
 
-let mouseX = 0
-let mouseY = 0
+let mouseX = 1228
+let mouseY = 492
 
 function animateParticles(event) {
 	mouseX = event.clientX
@@ -122,19 +124,18 @@ function onUserClick( event ) {
 }
 
 const animate = function () {
-  requestAnimationFrame( animate );
-
-	// Objects
-	sphere.rotation.y += 0.005
-
-
-	// starfield
-	particlesMesh.rotation.y = mouseX * .0012
-	particlesMesh.rotation.x = mouseY * .0012
-	renderer.render( scene, camera );
-
-// };
-
-}
+	requestAnimationFrame( animate );
+  
+	  // Objects
+	  sphere.rotation.y += 0.005
+	  cube.rotation.y = mouseX * -.0032
+	  cube.rotation.x = mouseY * .0032
+  
+	  // starfield
+	  particlesMesh.rotation.y = mouseX * .0012
+	  particlesMesh.rotation.x = mouseY * .0012
+	  renderer.render( scene, camera );
+  
+  };
 
 animate();
