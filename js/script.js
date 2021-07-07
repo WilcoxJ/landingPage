@@ -1,7 +1,3 @@
-
-
-const spheres = [];
-
 const canvas = document.createElement('canvas');
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
@@ -12,13 +8,6 @@ renderer.setClearColor(0x00000, 1);
 document.body.appendChild(renderer.domElement);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 camera.position.z = 60
-
-
-// Materials
-
-// const material = new THREE.PointsMaterial({ 
-// 	size: .005
-// });
 
 const material = new THREE.MeshStandardMaterial({ 
 		color: 0xdd187e,
@@ -49,13 +38,10 @@ frontLight.position.set(3000, 500, 3000).normalize(); // just a direction. you c
 scene.add(frontLight);
 
 //geometry
-// const geometry = new THREE.TorusGeometry( 13, 5, 25, 100 );
 const geometry = new THREE.IcosahedronGeometry( 12, 1 );
 const geometry2 = new THREE.BoxGeometry( 30, 30, 30,);
 const sphere = new THREE.Mesh( geometry, material );
 
-//torus
-// const sphere = new THREE.Points( geometry, material );
 sphere.receiveShadow = true;
 scene.add( sphere );
 
