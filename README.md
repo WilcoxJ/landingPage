@@ -1,5 +1,5 @@
 # Wilco 
 
-Learning three.js
+simple landing page created with three.js
 
-all the objects generated in /js/script.js
+all the fun stuff happens in /js/script.js
