@@ -2,4 +2,4 @@
 
 simple landing page created with three.js
 
-all the fun stuff happens in /js/script.js
+all objects and particles created in /js/script.js
