@@ -96,7 +96,6 @@ function onDocumentMouseWheel(event) {
 	camera.fov -= event.wheelDeltaY * 0.05;
 	camera.fov = Math.max( Math.min( camera.fov, fovMAX ), fovMIN );
 	camera.updateProjectionMatrix();
-
 }
 
 function onUserClick(event) {
