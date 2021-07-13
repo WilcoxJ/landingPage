@@ -75,7 +75,7 @@ scene.add(particlesMesh)
 
 //mouse
 document.addEventListener('mousemove', animateParticles)
-document.addEventListener('wheel', onDocumentMouseWheel) // the updateProjectionMatrix seems to break in firefox...
+document.addEventListener('wheel', onDocumentMouseWheel) // camera.updateProjectionMatrix seems to break in firefox
 document.addEventListener('click', onUserClick)
 
 let mouseX = 1228
