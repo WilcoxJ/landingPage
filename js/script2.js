@@ -62,7 +62,7 @@ let mouseX = 0
 let mouseY = 0
 
 function onDocumentMouseWheel(event) {
-    var fovMAX = 135;
+    var fovMAX = 125;
     var fovMIN = 25;
     camera.fov -= event.wheelDeltaY * 0.05;
     camera.fov = Math.max( Math.min( camera.fov, fovMAX ), fovMIN );
