@@ -45,7 +45,7 @@ const posArray = new Float32Array(particlesCount * 3);
 
 
 for(let i = 0; i < particlesCount * 3; i++) {
-    posArray[i] = (math.random() - 0.5) * 125
+    posArray[i] = (math.random() - 0.5) * 125;
 }
 
 particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3))
