@@ -28,6 +28,15 @@ scene.add( sphere );
 const cube = new THREE.Points( geometry2, material );
 
 
+// Light
+const light = new THREE.HemisphereLight(0xf402bc, 0x236e89, .5);
+scene.add(light);
+
+const frontLight = new THREE.DirectionalLight(0xb6ebef, .75);
+frontLight.position.set(3000, 500, 3000).normalize();
+scene.add(frontLight);
+
+
 window.addEventListener( 'resize', onWindowResize, false );
 
 function onWindowResize(){            
