@@ -1,6 +1,6 @@
 const canvas = document.createElement('canvas');
 const scene = new THREE.Scene();
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);            
 
 renderer.setClearColor(0x00000, 1);            
