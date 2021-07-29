@@ -55,8 +55,8 @@ const particlesMesh = new THREE.Points(particleGeometry, particlesMaterial);
 scene.add( cube, particlesMesh );
 
 //mouse
-document.addEventListener('mousemove', animateParticles)
-document.addEventListener('wheel', onDocumentMouseWheel) // camera.updateProjectionMatrix seems to break in firefox
+document.addEventListener('mousemove', animateParticles);
+document.addEventListener('wheel', onDocumentMouseWheel); // camera.updateProjectionMatrix seems to break in firefox
 
 let mouseX = 0;
 let mouseY = 0;
