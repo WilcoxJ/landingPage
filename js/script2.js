@@ -7,7 +7,7 @@ renderer.setClearColor(0x00000, 1);
 
 document.body.appendChild(renderer.domElement);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-camera.position.z = 60
+camera.position.z = 60;
 const material = new THREE.PointsMaterial({ 
         size: .005
     });
@@ -48,9 +48,9 @@ for(let i = 0; i < particlesCount * 3; i++) {
     posArray[i] = (math.random() - 0.5) * 125;
 }
 
-particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3))
+particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
-const particlesMesh = new THREE.Points(particleGeometry, particlesMaterial)
+const particlesMesh = new THREE.Points(particleGeometry, particlesMaterial);
 
 scene.add( cube, particlesMesh );
 
@@ -58,8 +58,8 @@ scene.add( cube, particlesMesh );
 document.addEventListener('mousemove', animateParticles)
 document.addEventListener('wheel', onDocumentMouseWheel) // camera.updateProjectionMatrix seems to break in firefox
 
-let mouseX = 0
-let mouseY = 0
+let mouseX = 0;
+let mouseY = 0;
 
 function onDocumentMouseWheel(event) {
     var fovMAX = 125;
@@ -70,13 +70,13 @@ function onDocumentMouseWheel(event) {
 }
 
 function animateParticles(event) {
-  mouseX = event.clientX
-  mouseY = event.clientY
+  mouseX = event.clientX;
+  mouseY = event.clientY;
 
 }
 
-const clock = new THREE.Clock()
-const elapsedTime = clock.getElapsedTime
+const clock = new THREE.Clock();
+const elapsedTime = clock.getElapsedTime;
 
 
 const animate = function () {
@@ -84,13 +84,13 @@ const animate = function () {
 
   // Objects
   // sphere.rotation.x += 0.01
-  sphere.rotation.y += 0.01
-  cube.rotation.x += 0.01
-  cube.rotation.y -= 0.01
+  sphere.rotation.y += 0.01;
+  cube.rotation.x += 0.01;
+  cube.rotation.y -= 0.01;
 
   // starfield
-  particlesMesh.rotation.y = mouseX * .0012
-  particlesMesh.rotation.x = mouseY * .0012
+  particlesMesh.rotation.y = mouseX * .0012;
+  particlesMesh.rotation.x = mouseY * .0012;
   renderer.render( scene, camera );
 };          
 
