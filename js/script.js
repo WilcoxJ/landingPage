@@ -1,3 +1,4 @@
+//script
 const canvas = document.createElement('canvas');
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });

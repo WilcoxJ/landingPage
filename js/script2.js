@@ -1,3 +1,4 @@
+// script2
 const canvas = document.createElement('canvas');
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
@@ -20,7 +21,7 @@ particlesMaterial.opacity = .80;
 
 // test new shapes
 const geometry = new THREE.TorusGeometry( 13, 5, 25, 100 );
-// const geometry = new THREE.ConeGeometry( 20, 35, 32, 35 );
+
 
 const geometry2 = new THREE.BoxGeometry( 30, 30, 30 );
 const sphere = new THREE.Points( geometry, material );

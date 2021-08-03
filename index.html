@@ -25,7 +25,16 @@
 	<script src="js/three.js"></script>
 	<script src="js/OrbitControls.js"></script>
 	<script src="js/math.js"></script>
-	<script src="js/script2.js"></script>
+	<script>
+		var file=document.createElement('script');
+		if( /Android|webOS|iPhone|iPad|Mac|Macintosh|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			file.setAttribute("src", "js/script.js");
+		} 
+		else {
+			file.setAttribute("src", "js/script2.js");
+		}
+		document.getElementsByTagName("head")[0].appendChild(file);
+	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js" integrity="sha512-2fk3Q4NXPYAqIha0glLZ2nluueK43aNoxvijPf53+DgL7UW9mkN+uXc1aEmnZdkkZVvtJZltpRt+JqTWc3TS3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/CSSRulePlugin.min.js" integrity="sha512-EIzKYNrmzSj8Q5czLrNi/F6bplhopAp2Li9nk/8r7MW+Ov9KPEo0xrjWMYXU8lFYy5dzh/w8Ql5ShZHucrjXdg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
 	<script>
