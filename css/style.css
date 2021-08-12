@@ -99,4 +99,8 @@ h1, i, p {
 	clip-path: polygon(0 0, 100% 0, 100% 0, 0 0)
 }
 
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
 
