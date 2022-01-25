@@ -28,8 +28,6 @@ const particlesMaterial = new THREE.PointsMaterial({
 	});
 particlesMaterial.opacity = .70;
 
-
-
 // Light
 const light = new THREE.HemisphereLight(0xf402bc, 0x236e89, .5);
 scene.add(light);
@@ -107,7 +105,7 @@ function onUserClick(event) {
 const animate = function () {
 	requestAnimationFrame( animate );
   
-	  // Objects
+	  // Objects set and rotate
 	  sphere.rotation.y += 0.005
 	  cube.rotation.y = mouseX * -.0032
 	  cube.rotation.x = mouseY * .0032
