@@ -5,9 +5,9 @@
 var fadeMaterial = new THREE.MeshBasicMaterial({
     color: 0x000000,
     transparent: true,
-    opacity: 0.9
+    opacity: 0.01
 });
-var fadePlane = new THREE.PlaneBufferGeometry(1, 1);
+var fadePlane = new THREE.PlaneBufferGeometry(10, 10);
 var fadeMesh = new THREE.Mesh(fadePlane, fadeMaterial);
 
 // Create Object3D to hold camera and transparent plane
@@ -20,7 +20,7 @@ camGroup.add(camera);
 camGroup.add(fadeMesh);
 
 // Put plane in front of camera
-fadeMesh.position.z = -0.06;
+fadeMesh.position.z = -0.08;
 
 // Make plane render before particles
 fadeMesh.renderOrder = -1;
@@ -29,7 +29,7 @@ fadeMesh.renderOrder = -1;
 const canvas = document.createElement('canvas');
 const scene = new THREE.Scene();
 // const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-renderer = new THREE.WebGLRenderer( { preserveDrawingBuffer: true, antialias: true } );
+renderer = new THREE.WebGLRenderer( { alpha: true, preserveDrawingBuffer: true, antialias: true } );
 
 // renderer.setSize(window.innerWidth, window.innerHeight);            
 
@@ -54,7 +54,7 @@ const particlesMaterial = new THREE.PointsMaterial({
         transparent: true,
         color: 0x2262c9
     });
-particlesMaterial.opacity = .80;
+particlesMaterial.opacity = .85;
 
 const geometry = new THREE.TorusGeometry( 13, 5, 25, 100 );
 
@@ -111,8 +111,8 @@ let mouseX = 0;
 let mouseY = 0;
 
 function onDocumentMouseWheel(event) {
-    renderer.autoClearColor = true;
-    renderer.setClearColor(0x00000, 1); 
+    // renderer.autoClearColor = true;
+    // renderer.setClearColor(0x00000, 1); 
     var fovMAX = 125;
     var fovMIN = 25;
     camera.fov -= event.wheelDeltaY * 0.05;
@@ -127,11 +127,13 @@ var flip = true;
 function onDocumentClick(event) {
     if (flip == true) {
         renderer.autoClearColor = false; // trails 
+        fadeMesh.position.z = -0.12;
         flip = false;
     }
     else {
         renderer.autoClearColor = true;
         renderer.setClearColor(0x00000, 1); 
+        fadeMesh.position.z = -0.02;
         flip = true;
     }
 
