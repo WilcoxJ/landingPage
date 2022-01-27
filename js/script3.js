@@ -49,7 +49,9 @@ camGroup.position.z = 60;
 //materials
 const material = new THREE.PointsMaterial({ 
         size: .005,
-        color: 0xFF005D
+        color: 0xFF005D //red
+        // color: 0xff00dc // purple
+        // color: 0x5dff00 //green
     });
 const particlesMaterial = new THREE.PointsMaterial({ 
         size: .012,
@@ -136,6 +138,19 @@ function onDocumentMouseUp(event) {
     fadeMesh.position.z = -0.02;
 
   }
+
+
+// var flip = true;
+
+
+
+function onDocumentClick(event) {
+    renderer.autoClearColor = true;
+    renderer.setClearColor(0x00000, 1); 
+    material.color = 0xff00dc;
+
+}
+
 
 function animateParticles(event) {
   mouseX = event.clientX;

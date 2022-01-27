@@ -18,7 +18,13 @@ body {
 
 }
 
-
+#one:hover {
+	cursor: pointer;
+  }
+  
+  button:hover {
+	cursor: default;
+  }
 
 .webgl {
 	position: fixed;
