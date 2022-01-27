@@ -3,6 +3,7 @@ html {
 	padding: 0;
 	height: 100%;
 	overflow:hidden;
+	cursor: pointer;
 }
 
 body {
@@ -18,13 +19,13 @@ body {
 
 }
 
-#one:hover {
+/* #one:hover {
 	cursor: pointer;
   }
   
   button:hover {
 	cursor: default;
-  }
+  } */
 
 .webgl {
 	position: fixed;
