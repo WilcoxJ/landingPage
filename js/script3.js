@@ -5,7 +5,7 @@
 var fadeMaterial = new THREE.MeshBasicMaterial({
     color: 0x000000,
     transparent: true,
-    opacity: 0.01
+    opacity: 0.05
 });
 var fadePlane = new THREE.PlaneBufferGeometry(10, 10);
 var fadeMesh = new THREE.Mesh(fadePlane, fadeMaterial);
@@ -44,8 +44,9 @@ document.body.appendChild(renderer.domElement);
 
 // Add camGroup to scene
 scene.add(camGroup);
-
 camGroup.position.z = 60;
+
+//materials
 const material = new THREE.PointsMaterial({ 
         size: .005,
         color: 0xFF005D
@@ -59,20 +60,11 @@ particlesMaterial.opacity = .90;
 
 
 
-const effect = new THREE.PointsMaterial({ 
-    size: .05,
-    transparent: true,
-    color: 0x2262c9
-});
-
-
-
-
-
+// geometry
 const geometry = new THREE.TorusGeometry( 13, 5, 25, 100 );
-
-
 const geometry2 = new THREE.BoxGeometry( 30, 30, 30 );
+
+
 const sphere = new THREE.Points( geometry, material );
 scene.add( sphere );
 const cube = new THREE.Points( geometry2, material );
@@ -124,8 +116,6 @@ let mouseX = 0;
 let mouseY = 0;
 
 function onDocumentMouseWheel(event) {
-    // renderer.autoClearColor = true;
-    // renderer.setClearColor(0x00000, 1); 
     var fovMAX = 125;
     var fovMIN = 25;
     camera.fov -= event.wheelDeltaY * 0.05;
@@ -134,15 +124,13 @@ function onDocumentMouseWheel(event) {
 
 }
 
-//
-// var flip = true;
 
 function onDocumentMouseDown(event) {
         renderer.autoClearColor = false; // trails 
         fadeMesh.position.z = -0.12;
   }
 
-  function onDocumentMouseUp(event) {
+function onDocumentMouseUp(event) {
     renderer.autoClearColor = true;
     renderer.setClearColor(0x00000, 1); 
     fadeMesh.position.z = -0.02;
