@@ -47,14 +47,17 @@ scene.add(camGroup);
 
 camGroup.position.z = 60;
 const material = new THREE.PointsMaterial({ 
-        size: .005
+        size: .005,
+        color: 0xFF005D
     });
 const particlesMaterial = new THREE.PointsMaterial({ 
         size: .012,
         transparent: true,
         color: 0x2262c9
     });
-particlesMaterial.opacity = .85;
+particlesMaterial.opacity = .90;
+
+
 
 const geometry = new THREE.TorusGeometry( 13, 5, 25, 100 );
 
@@ -128,6 +131,7 @@ function onDocumentClick(event) {
     if (flip == true) {
         renderer.autoClearColor = false; // trails 
         fadeMesh.position.z = -0.12;
+
         flip = false;
     }
     else {
