@@ -59,6 +59,16 @@ particlesMaterial.opacity = .90;
 
 
 
+const effect = new THREE.PointsMaterial({ 
+    size: .05,
+    transparent: true,
+    color: 0x2262c9
+});
+
+
+
+
+
 const geometry = new THREE.TorusGeometry( 13, 5, 25, 100 );
 
 
@@ -107,8 +117,8 @@ scene.add( cube, particlesMesh );
 //mouse
 document.addEventListener('mousemove', animateParticles);
 document.addEventListener('wheel', onDocumentMouseWheel); // camera.updateProjectionMatrix seems to break in firefox
-document.addEventListener('click', onDocumentClick);
-
+document.addEventListener('mousedown', onDocumentMouseDown);
+document.addEventListener('mouseup', onDocumentMouseUp);  // TODO: make this function opposite
 
 let mouseX = 0;
 let mouseY = 0;
@@ -125,21 +135,17 @@ function onDocumentMouseWheel(event) {
 }
 
 //
-var flip = true;
+// var flip = true;
 
-function onDocumentClick(event) {
-    if (flip == true) {
+function onDocumentMouseDown(event) {
         renderer.autoClearColor = false; // trails 
         fadeMesh.position.z = -0.12;
+  }
 
-        flip = false;
-    }
-    else {
-        renderer.autoClearColor = true;
-        renderer.setClearColor(0x00000, 1); 
-        fadeMesh.position.z = -0.02;
-        flip = true;
-    }
+  function onDocumentMouseUp(event) {
+    renderer.autoClearColor = true;
+    renderer.setClearColor(0x00000, 1); 
+    fadeMesh.position.z = -0.02;
 
   }
 
