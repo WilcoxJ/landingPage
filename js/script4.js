@@ -71,6 +71,7 @@ const sphere = new THREE.Points( geometry, material );
 scene.add( sphere );
 const cube = new THREE.Points( geometry2, material );
 
+scene.add( cube );
 
 // Light
 const light = new THREE.HemisphereLight(0xf402bc, 0x236e89, .5);
@@ -93,38 +94,38 @@ function onWindowResize(){
 
 
 //particles
-const particleGeometry = new THREE.BufferGeometry;
-const particlesCount = 20000;
-const posArray = new Float32Array(particlesCount * 3);
+// const particleGeometry = new THREE.BufferGeometry;
+// const particlesCount = 20000;
+// const posArray = new Float32Array(particlesCount * 3);
 
 
-for(let i = 0; i < particlesCount * 3; i++) {
-    posArray[i] = (math.random() - 0.5) * 125;
-}
+// for(let i = 0; i < particlesCount * 3; i++) {
+//     posArray[i] = (math.random() - 0.5) * 125;
+// }
 
-particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+// particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
-const particlesMesh = new THREE.Points(particleGeometry, particlesMaterial);
+// const particlesMesh = new THREE.Points(particleGeometry, particlesMaterial);
 
-scene.add( cube, particlesMesh );
 
+// scene.add( particlesMesh );
 //mouse
-document.addEventListener('mousemove', animateParticles);
-document.addEventListener('wheel', onDocumentMouseWheel); // camera.updateProjectionMatrix seems to break in firefox
+// document.addEventListener('mousemove', animateParticles);
+// document.addEventListener('wheel', onDocumentMouseWheel); // camera.updateProjectionMatrix seems to break in firefox
 document.addEventListener('mousedown', onDocumentMouseDown);
 document.addEventListener('mouseup', onDocumentMouseUp);  // TODO: make this function opposite
 
-let mouseX = 0;
-let mouseY = 0;
+// let mouseX = 0;
+// let mouseY = 0;
 
-function onDocumentMouseWheel(event) {
-    var fovMAX = 125;
-    var fovMIN = 25;
-    camera.fov -= event.wheelDeltaY * 0.05;
-    camera.fov = Math.max( Math.min( camera.fov, fovMAX ), fovMIN );
-    camera.updateProjectionMatrix();
+// function onDocumentMouseWheel(event) {
+//     var fovMAX = 125;
+//     var fovMIN = 25;
+//     camera.fov -= event.wheelDeltaY * 0.05;
+//     camera.fov = Math.max( Math.min( camera.fov, fovMAX ), fovMIN );
+//     camera.updateProjectionMatrix();
 
-}
+// }
 
 
 function onDocumentMouseDown(event) {
@@ -148,11 +149,11 @@ function onDocumentClick(event) {
 }
 
 
-function animateParticles(event) {
-  mouseX = event.clientX;
-  mouseY = event.clientY;
+// function animateParticles(event) {
+//   mouseX = event.clientX;
+//   mouseY = event.clientY;
 
-}
+// }
 
 const clock = new THREE.Clock();
 const elapsedTime = clock.getElapsedTime;
@@ -167,8 +168,8 @@ const animate = function () {
   cube.rotation.y -= 0.01;
 
   // starfield
-  particlesMesh.rotation.y = mouseX * .0012;
-  particlesMesh.rotation.x = mouseY * .0012;
+//   particlesMesh.rotation.y = mouseX * .0012;
+//   particlesMesh.rotation.x = mouseY * .0012;
   renderer.render( scene, camera );
 };          
 
