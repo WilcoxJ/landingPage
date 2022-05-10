@@ -127,6 +127,14 @@ function onDocumentMouseWheel(event) {
 }
 
 
+document.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        renderer.autoClearColor = false; // trails 
+        fadeMesh.position.z = -0.12;
+        controls.update();
+    }
+});
+
 function onDocumentMouseDown(event) {
         renderer.autoClearColor = false; // trails 
         fadeMesh.position.z = -0.12;
