@@ -31,13 +31,13 @@ camGroup.position.z = 60;
 
 //materials
 const material = new THREE.PointsMaterial({ 
-        size: .005,
+        size: .008,
         color: 0xFF005D //red
         // color: 0xff00dc // purple
         // color: 0x5dff00 //green
     });
 const particlesMaterial = new THREE.PointsMaterial({ 
-        size: .012,
+        size: .015,
         transparent: true,
         color: 0x2262c9
     });
@@ -52,7 +52,7 @@ scene.add( sphere );
 const cube = new THREE.Points( geometry2, material );
 
 // Light
-const light = new THREE.HemisphereLight(0xf402bc, 0x236e89, .5);
+const light = new THREE.HemisphereLight(0xf402bc, 0x236e89, .7);
 scene.add(light);
 
 window.addEventListener( 'resize', onWindowResize, false );
