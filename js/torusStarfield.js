@@ -8,6 +8,10 @@ var fadeMesh = new THREE.Mesh(fadePlane, fadeMaterial);
 
 var camGroup = new THREE.Object3D();
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+let orbitControls = new THREE.OrbitControls(camera);
+
+orbitControls.enabled = true;
+
 
 camGroup.add(camera);
 camGroup.add(fadeMesh);
@@ -37,9 +41,10 @@ const material = new THREE.PointsMaterial({
         // color: 0x5dff00 //green
     });
 const particlesMaterial = new THREE.PointsMaterial({ 
-        size: .015,
+        size: .009,
         transparent: true,
         color: 0x2262c9
+
     });
 particlesMaterial.opacity = .90;
 
@@ -52,8 +57,8 @@ scene.add( sphere );
 const cube = new THREE.Points( geometry2, material );
 
 // Light
-const light = new THREE.HemisphereLight(0xf402bc, 0x236e89, .7);
-scene.add(light);
+// const light = new THREE.HemisphereLight(0xf402bc, 0x236e89, .95);
+// scene.add(light);
 
 window.addEventListener( 'resize', onWindowResize, false );
 
@@ -89,7 +94,7 @@ let mouseY = 0;
 function onDocumentMouseWheel(event) {
     var fovMAX = 125;
     var fovMIN = 25;
-    camera.fov -= event.wheelDeltaY * 0.05;
+    camera.fov -= event.wheelDeltaY * 0.02;
     camera.fov = Math.max( Math.min( camera.fov, fovMAX ), fovMIN );
     camera.updateProjectionMatrix();
 

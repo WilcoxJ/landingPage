@@ -3,7 +3,7 @@ html {
 	padding: 0;
 	height: 100%;
 	overflow:hidden;
-	cursor: pointer;
+	/* cursor: pointer; */
 }
 
 body {
@@ -16,16 +16,15 @@ body {
 	color: #ffffff;
 	font-family: Arial, Helvetica, sans-serif;
 	position: relative;
-
 }
 
-/* #one:hover {
+body h1 {
 	cursor: pointer;
-  }
-  
-  button:hover {
-	cursor: default;
-  } */
+}
+
+body p {
+	cursor: pointer;
+}
 
 .webgl {
 	position: fixed;
