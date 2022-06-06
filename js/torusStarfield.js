@@ -33,6 +33,12 @@ document.body.appendChild(renderer.domElement);
 scene.add(camGroup);
 camGroup.position.z = 60;
 
+const sprite = new THREE.TextureLoader().load( 'img/disc.png' );
+
+
+
+
+
 //materials
 const material = new THREE.PointsMaterial({ 
         size: .008,
@@ -42,11 +48,16 @@ const material = new THREE.PointsMaterial({
     });
 const particlesMaterial = new THREE.PointsMaterial({ 
         size: .009,
-        transparent: true,
-        color: 0x2262c9
+        transparent: false,
+        color: 0x2262c9,
+        // color: 0x5dff00,
+        map: sprite
 
     });
-particlesMaterial.opacity = .90;
+
+particlesMaterial.opacity = .99;
+
+
 
 // geometry
 const geometry = new THREE.TorusGeometry( 13, 5, 25, 100 );
@@ -75,7 +86,7 @@ const particlesCount = 20000;
 const posArray = new Float32Array(particlesCount * 3);
 
 for(let i = 0; i < particlesCount * 3; i++) {
-    posArray[i] = (math.random() - 0.5) * 125;
+    posArray[i] = (math.random() - 0.5) * 120;
 }
 
 particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
@@ -103,6 +114,7 @@ function onDocumentMouseWheel(event) {
 function onDocumentMouseDown(event) {
         renderer.autoClearColor = false; // trails 
         fadeMesh.position.z = -0.12;
+        
   }
 
 function onDocumentMouseUp(event) {
@@ -136,9 +148,12 @@ const animate = function () {
   cube.rotation.x += 0.01;
   cube.rotation.y -= 0.01;
 
+  particlesMesh.rotation.x += 0.001;
+  particlesMesh.rotation.y += 0.001;
+
   // starfield
-  particlesMesh.rotation.y = mouseX * .0012;
-  particlesMesh.rotation.x = mouseY * .0012;
+//   particlesMesh.rotation.y = mouseX * .0006;
+//   particlesMesh.rotation.x = mouseY * .0006;
   renderer.render( scene, camera );
 };          
 
