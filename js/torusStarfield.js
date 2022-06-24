@@ -28,6 +28,12 @@ renderer.setClearColor(0x00000, 1);
 // renderer.autoClearColor = false;
 renderer.setSize(window.innerWidth, window.innerHeight);
 
+// renderer.autoClearColor = false; // trails 
+// fadeMesh.position.z = -0.12;
+
+renderer.autoClearColor = true; // no trails 
+fadeMesh.position.z = -0.02;
+
 document.body.appendChild(renderer.domElement);
 
 scene.add(camGroup);
@@ -111,31 +117,46 @@ function onDocumentMouseWheel(event) {
 
 }
 
+function animateParticles(event) {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+  
+  }
+
 function onDocumentMouseDown(event) {
-        renderer.autoClearColor = false; // trails 
-        fadeMesh.position.z = -0.12;
+    renderer.autoClearColor = true; // no trails 
+    fadeMesh.position.z = -0.02;
+    // particlesMesh.rotation.y = mouseX * .0002;
+    // particlesMesh.rotation.x = mouseY * .0002;
         
   }
 
+var trails = false;
 function onDocumentMouseUp(event) {
-    renderer.autoClearColor = true;
+  if(trails == false) {
+    renderer.autoClearColor = false; // trails
     renderer.setClearColor(0x00000, 1); 
+    fadeMesh.position.z = -0.12;
+    trails = true;
+  }
+  else {
+    renderer.autoClearColor = true; // no trails 
     fadeMesh.position.z = -0.02;
+    trails = false;
+  }
 
   }
 
+
 function onDocumentClick(event) {
-    renderer.autoClearColor = true;
-    renderer.setClearColor(0x00000, 1); 
+  renderer.autoClearColor = false; // trails
+  renderer.setClearColor(0x00000, 1); 
+  fadeMesh.position.z = -0.12;
     material.color = 0xff00dc;
 
 }
 
-function animateParticles(event) {
-  mouseX = event.clientX;
-  mouseY = event.clientY;
 
-}
 
 const clock = new THREE.Clock();
 const elapsedTime = clock.getElapsedTime;
@@ -148,12 +169,23 @@ const animate = function () {
   cube.rotation.x += 0.01;
   cube.rotation.y -= 0.01;
 
-  particlesMesh.rotation.x += 0.001;
-  particlesMesh.rotation.y += 0.001;
+
 
   // starfield
-//   particlesMesh.rotation.y = mouseX * .0006;
-//   particlesMesh.rotation.x = mouseY * .0006;
+  if (trails == false) {
+     particlesMesh.rotation.y = mouseX * .0004;
+   particlesMesh.rotation.x = mouseY * .0004;
+  }
+  else {
+     particlesMesh.rotation.x += 0.001;
+    particlesMesh.rotation.y += 0.001;
+  }
+  // particlesMesh.rotation.y = mouseX * .0004;
+  // particlesMesh.rotation.x = mouseY * .0004;
+
+  // particlesMesh.rotation.x += 0.001;
+  // particlesMesh.rotation.y += 0.001;
+
   renderer.render( scene, camera );
 };          
 
