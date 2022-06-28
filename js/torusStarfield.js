@@ -130,7 +130,19 @@ composer.addPass( bloomPass );
 
 //GLTF
 
+// new THREE.GLTFLoader().load( 'models/treesDoor.glb', function ( gltf ) {
 
+//   const model = gltf.scene;
+
+//   scene.add( model );
+
+//   mixer = new THREE.AnimationMixer( model );
+//   const clip = gltf.animations[ 0 ];
+//   mixer.clipAction( clip.optimize() ).play();
+
+//   animate();
+
+// } );
 
 //mouse
 document.addEventListener('mousemove', animateParticles);
