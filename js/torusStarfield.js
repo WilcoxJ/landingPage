@@ -95,11 +95,11 @@ function onWindowResize(){
 
 //particles
 const particleGeometry = new THREE.BufferGeometry;
-const particlesCount = 25000;
+const particlesCount = 40000;
 const posArray = new Float32Array(particlesCount * 3);
 
 for(let i = 0; i < particlesCount * 3; i++) {
-  posArray[i] = (math.random() - 0.5) * 140;
+  posArray[i] = (math.random() - 0.5) * 180;
 }
 
 particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
