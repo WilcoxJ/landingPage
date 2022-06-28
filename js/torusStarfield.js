@@ -79,8 +79,10 @@ scene.add( sphere );
 const cube = new THREE.Points( geometry2, material );
 
 // Light
-// const light = new THREE.HemisphereLight(0xf402bc, 0x236e89, .95);
-// scene.add(light);
+scene.add( new THREE.AmbientLight( 0x404040 ) );
+
+const pointLight = new THREE.PointLight( 0xffffff, 1 );
+camera.add( pointLight );
 
 window.addEventListener( 'resize', onWindowResize, false );
 
@@ -126,6 +128,7 @@ composer.addPass( renderScene );
 
 composer.addPass( bloomPass );
 
+//GLTF
 
 
 
@@ -179,10 +182,13 @@ else {
 
 
 function onDocumentClick(event) {
-renderer.autoClearColor = false; // trails
-renderer.setClearColor(0x00000, 1); 
-fadeMesh.position.z = -0.12;
-  material.color = 0xff00dc;
+  // renderer.autoClearColor = false; // trails
+  // renderer.setClearColor(0x00000, 1); 
+  // fadeMesh.position.z = -0.12;
+  // trails = true;
+
+  // material.color = 0xff00dc;
+  // animate();
 
 }
 
