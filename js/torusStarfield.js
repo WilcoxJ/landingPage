@@ -24,11 +24,17 @@ const scene = new THREE.Scene();
 // const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
 renderer = new THREE.WebGLRenderer( { alpha: true, preserveDrawingBuffer: true, antialias: true } );
 
+
+// start with no trails
 renderer.setClearColor(0x00000, 1);  
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.autoClearColor = true; // no trails 
+renderer.autoClearColor = true; // no trails
 
-fadeMesh.position.z = -0.02;
+
+renderer.autoClearColor = false; // trails
+fadeMesh.position.z = -0.12;
+
+// fadeMesh.position.z = -0.02;
 
 document.body.appendChild(renderer.domElement);
 
@@ -149,7 +155,7 @@ let mouseY = 0;
 
 function onDocumentMouseWheel(event) {
   var fovMAX = 120;
-  var fovMIN = 25;
+  var fovMIN = 10;
   camera.fov -= event.wheelDeltaY * 0.02;
   camera.fov = Math.max( Math.min( camera.fov, fovMAX ), fovMIN );
   camera.updateProjectionMatrix();
@@ -170,7 +176,7 @@ function onDocumentMouseDown(event) {
       
 }
 
-var trails = false;
+var trails = true;
 function onDocumentMouseUp(event) {
 if(trails == false) {
   renderer.autoClearColor = false; // trails
@@ -203,6 +209,8 @@ function onDocumentClick(event) {
 const clock = new THREE.Clock();
 const elapsedTime = clock.getElapsedTime;
 
+camera.fov = 10;
+
 const animate = function () {
 requestAnimationFrame( animate );
 // Objects
@@ -220,8 +228,8 @@ if (trails == false) {
 //  material.size = .25;
 }
 else {
-  particlesMesh.rotation.x += -0.001;
-  particlesMesh.rotation.y += -0.001;
+  particlesMesh.rotation.x += 0.001;
+  particlesMesh.rotation.y += 0.001;
   cube.rotation.x = mouseY * .0012;
   cube.rotation.y = mouseX * .0012;
 
