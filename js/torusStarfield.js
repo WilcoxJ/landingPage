@@ -46,14 +46,17 @@ const sprite = new THREE.TextureLoader().load( 'img/disc.png' );
 
 
 
-
-
-
-
 //materials
+const torusMaterial = new THREE.PointsMaterial({ 
+  size: .008,
+  color: 0xFF005D //red
+  // color: 0xff00dc // purple
+  // color: 0x5dff00 //green
+});
+
 const material = new THREE.PointsMaterial({ 
-      size: .008,
-      color: 0xFF005D //red
+  size: .008,
+  color: 0xFF005D //red
       // color: 0xff00dc // purple
       // color: 0x5dff00 //green
   });
@@ -74,8 +77,8 @@ particlesMaterial.opacity = .99;
 const geometry = new THREE.TorusGeometry( 13, 5, 25, 100 );
 const geometry2 = new THREE.BoxGeometry( 30, 30, 30 );
 
-const sphere = new THREE.Points( geometry, material );
-scene.add( sphere );
+const torus = new THREE.Points( geometry, torusMaterial );
+scene.add( torus );
 const cube = new THREE.Points( geometry2, material );
 
 // Light
@@ -95,7 +98,7 @@ function onWindowResize(){
 
 //particles
 const particleGeometry = new THREE.BufferGeometry;
-const particlesCount = 55000;
+const particlesCount = 60000;
 const posArray = new Float32Array(particlesCount * 3);
 
 for(let i = 0; i < particlesCount * 3; i++) {
@@ -111,9 +114,9 @@ scene.add( cube, particlesMesh );
 
 const params = {
   exposure: 1,
-  bloomStrength: 1.9,
+  bloomStrength: 0.9,
   bloomThreshold: 0,
-  bloomRadius: 0
+  bloomRadius: 0.25
 };
 
 const renderScene = new THREE.RenderPass( scene, camera );
@@ -194,12 +197,12 @@ else {
 
 
 function onDocumentClick(event) {
-  // renderer.autoClearColor = false; // trails
-  // renderer.setClearColor(0x00000, 1); 
+  renderer.autoClearColor = false; // trails
+  renderer.setClearColor(0x00000, 1); 
   // fadeMesh.position.z = -0.12;
   // trails = true;
 
-  // material.color = 0xff00dc;
+  // torusMaterial.color = 0xff00dc;
   // animate();
 
 }
@@ -212,8 +215,8 @@ const elapsedTime = clock.getElapsedTime;
 const animate = function () {
 requestAnimationFrame( animate );
 // Objects
-// sphere.rotation.x += 0.01
-sphere.rotation.y += 0.01;
+
+torus.rotation.y += 0.01;
 cube.rotation.x += 0.01;
 cube.rotation.y -= 0.01;
 
@@ -221,8 +224,9 @@ cube.rotation.y -= 0.01;
 
 // starfield
 if (trails == false) {
-   particlesMesh.rotation.y = mouseX * .0006;
- particlesMesh.rotation.x = mouseY * .0006;
+   particlesMesh.rotation.y = mouseX * .0009;
+ particlesMesh.rotation.x = mouseY * .0009;
+//  material.size = .25;
 }
 else {
 
@@ -231,8 +235,6 @@ else {
   cube.rotation.x = mouseY * .0012;
   cube.rotation.y = mouseX * .0012;
 
-  // sphere.rotation.x = mouseY * .0020;
-  // sphere.rotation.y = mouseX * .0020;
 }
 // particlesMesh.rotation.y = mouseX * .0004;
 // particlesMesh.rotation.x = mouseY * .0004;
