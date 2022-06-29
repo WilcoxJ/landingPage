@@ -60,8 +60,8 @@ const material = new THREE.PointsMaterial({
 const particlesMaterial = new THREE.PointsMaterial({ 
       size: .009,
       transparent: false,
-      color: 0x2262c9,
-      // color: 0x5dff00,
+      // color: 0x2262c9,
+      color: 0x32befa,
       map: sprite
 
   });
@@ -95,11 +95,11 @@ function onWindowResize(){
 
 //particles
 const particleGeometry = new THREE.BufferGeometry;
-const particlesCount = 40000;
+const particlesCount = 55000;
 const posArray = new Float32Array(particlesCount * 3);
 
 for(let i = 0; i < particlesCount * 3; i++) {
-  posArray[i] = (math.random() - 0.5) * 180;
+  posArray[i] = (math.random() - 0.5) * 360;
 }
 
 particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
@@ -111,8 +111,8 @@ scene.add( cube, particlesMesh );
 
 const params = {
   exposure: 1,
-  bloomStrength: 0.6,
-  bloomThreshold: 0.25,
+  bloomStrength: 1.9,
+  bloomThreshold: 0,
   bloomRadius: 0
 };
 
@@ -228,6 +228,11 @@ else {
 
    particlesMesh.rotation.x += 0.001;
   particlesMesh.rotation.y += 0.001;
+  cube.rotation.x = mouseY * .0012;
+  cube.rotation.y = mouseX * .0012;
+
+  // sphere.rotation.x = mouseY * .0020;
+  // sphere.rotation.y = mouseX * .0020;
 }
 // particlesMesh.rotation.y = mouseX * .0004;
 // particlesMesh.rotation.x = mouseY * .0004;
