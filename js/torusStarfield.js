@@ -1,5 +1,3 @@
-
-
 var fadeMaterial = new THREE.MeshBasicMaterial({
   color: 0x000000,
   transparent: true,
@@ -27,13 +25,9 @@ const scene = new THREE.Scene();
 renderer = new THREE.WebGLRenderer( { alpha: true, preserveDrawingBuffer: true, antialias: true } );
 
 renderer.setClearColor(0x00000, 1);  
-// renderer.autoClearColor = false;
 renderer.setSize(window.innerWidth, window.innerHeight);
-
-// renderer.autoClearColor = false; // trails 
-// fadeMesh.position.z = -0.12;
-
 renderer.autoClearColor = true; // no trails 
+
 fadeMesh.position.z = -0.02;
 
 document.body.appendChild(renderer.domElement);
@@ -42,9 +36,6 @@ scene.add(camGroup);
 camGroup.position.z = 100;
 
 const sprite = new THREE.TextureLoader().load( 'img/disc.png' );
-
-
-
 
 //materials
 const torusMaterial = new THREE.PointsMaterial({ 
@@ -69,7 +60,7 @@ const particlesMaterial = new THREE.PointsMaterial({
 
   });
 
-particlesMaterial.opacity = .99;
+particlesMaterial.opacity = 1;
 
 
 
@@ -224,23 +215,31 @@ cube.rotation.y -= 0.01;
 
 // starfield
 if (trails == false) {
-   particlesMesh.rotation.y = mouseX * .0009;
- particlesMesh.rotation.x = mouseY * .0009;
+  particlesMesh.rotation.y = mouseX * .0009;
+  particlesMesh.rotation.x = mouseY * .0009;
 //  material.size = .25;
 }
 else {
-
-   particlesMesh.rotation.x += 0.001;
-  particlesMesh.rotation.y += 0.001;
+  particlesMesh.rotation.x += -0.001;
+  particlesMesh.rotation.y += -0.001;
   cube.rotation.x = mouseY * .0012;
   cube.rotation.y = mouseX * .0012;
 
 }
 // particlesMesh.rotation.y = mouseX * .0004;
 // particlesMesh.rotation.x = mouseY * .0004;
-
 // particlesMesh.rotation.x += 0.001;
 // particlesMesh.rotation.y += 0.001;
+
+
+
+//zoom
+
+camera.fov += .05;
+
+camera.updateProjectionMatrix();
+
+
 composer.render();
 // renderer.render( scene, camera );
 };          
