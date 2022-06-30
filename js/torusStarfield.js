@@ -52,10 +52,13 @@ const torusMaterial = new THREE.PointsMaterial({
 });
 
 const material = new THREE.PointsMaterial({ 
-  size: .008,
-  color: 0xFF005D //red
+  size: .098,
+  // color: 0xFF005D //red
       // color: 0xff00dc // purple
+      color: 0xfc00bd //purp2
       // color: 0x5dff00 //green
+      // color: 0xfc713a // orange
+
   });
 const particlesMaterial = new THREE.PointsMaterial({ 
       size: .009,
@@ -192,15 +195,12 @@ else {
 
 }
 
-
+//github link click
 function onDocumentClick(event) {
-  renderer.autoClearColor = false; // trails
+  renderer.autoClearColor = false; // trails or super trails :D
   renderer.setClearColor(0x00000, 1); 
   // fadeMesh.position.z = -0.12;
   // trails = true;
-
-  // torusMaterial.color = 0xff00dc;
-  // animate();
 
 }
 
@@ -230,8 +230,8 @@ if (trails == false) {
 else {
   particlesMesh.rotation.x += 0.001;
   particlesMesh.rotation.y += 0.001;
-  cube.rotation.x = mouseY * .0012;
-  cube.rotation.y = mouseX * .0012;
+  // cube.rotation.x = mouseY * .0012;
+  // cube.rotation.y = mouseX * .0012;
 
 }
 // particlesMesh.rotation.y = mouseX * .0004;
@@ -242,10 +242,14 @@ else {
 
 
 //zoom
+if (camera.fov < 120) {
+  camera.fov += .05;
+  // camera.fov += .25;
+  camera.updateProjectionMatrix();
+}
 
-camera.fov += .05;
 
-camera.updateProjectionMatrix();
+
 
 
 composer.render();
