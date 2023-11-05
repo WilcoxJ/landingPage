@@ -160,7 +160,7 @@ function onDocumentClick(event) {
 const clock = new THREE.Clock();
 const elapsedTime = clock.getElapsedTime;
 
-camera.fov = 10;
+camera.fov = 100;
 
 const animate = function () {
 	requestAnimationFrame( animate );
@@ -182,7 +182,7 @@ const animate = function () {
 	}
 
 	//zoom
-	camera.fov += .05;
+	camera.fov -= .05;
 	camera.updateProjectionMatrix();
 	composer.render();
 };
