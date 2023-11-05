@@ -137,7 +137,7 @@ function onDocumentMouseDown(event) {
 	fadeMesh.position.z = -0.02;	  
 }
 
-var trails = true;
+var trails = false;
 function onDocumentMouseUp(event) {
 	if(trails == false) {
 		renderer.autoClearColor = false; // trails
@@ -153,8 +153,16 @@ function onDocumentMouseUp(event) {
 }
 
 function onDocumentClick(event) {
-	renderer.autoClearColor = false; // trails
-	renderer.setClearColor(0x00000, 1); 
+	if(trails == false) {
+		renderer.autoClearColor = false; // trails
+		renderer.setClearColor(0x00000, 1); 
+		trails = true;
+	}
+	else {
+		renderer.autoClearColor = true; // no trails 
+		fadeMesh.position.z = -0.02;
+		trails = false;
+	}
 }
 
 const clock = new THREE.Clock();
