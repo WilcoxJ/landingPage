@@ -23,7 +23,7 @@ const scene = new THREE.Scene();
 renderer = new THREE.WebGLRenderer( { alpha: true, preserveDrawingBuffer: true, antialias: true } );
 renderer.setClearColor(0x00000, 1);  
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.autoClearColor = false; // trails
+renderer.autoClearColor = true; // no trails
 fadeMesh.position.z = -0.12;
 
 document.body.appendChild(renderer.domElement);
