@@ -7,7 +7,7 @@ var fadePlane = new THREE.PlaneBufferGeometry(10, 10);
 var fadeMesh = new THREE.Mesh(fadePlane, fadeMaterial);
 
 var camGroup = new THREE.Object3D();
-var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 let orbitControls = new THREE.OrbitControls(camera);
 
 orbitControls.enabled = true;
@@ -20,10 +20,10 @@ fadeMesh.renderOrder = -1;
 const canvas = document.createElement('canvas');
 const scene = new THREE.Scene();
 
-renderer = new THREE.WebGLRenderer( { alpha: true, preserveDrawingBuffer: true, antialias: true } );
-renderer.setClearColor(0x00000, 1);  
+const renderer = new THREE.WebGLRenderer({ alpha: true, preserveDrawingBuffer: true, antialias: true, powerPreference: "high-performance" });
+renderer.setClearColor(0x00000, 1);
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.autoClearColor = true; // no trails
+renderer.autoClearColor = true;
 fadeMesh.position.z = -0.12;
 
 document.body.appendChild(renderer.domElement);
@@ -31,66 +31,53 @@ document.body.appendChild(renderer.domElement);
 scene.add(camGroup);
 camGroup.position.z = 100;
 
-const sprite = new THREE.TextureLoader().load( 'img/disc.png' );
+const sprite = new THREE.TextureLoader().load('img/disc.png');
 
-//materials
-const torusMaterial = new THREE.PointsMaterial({ 
-	size: .008,
-	color: 0xFF005D //red
-	//color: 0xff00dc // purple
-	// color: 0x5dff00 //green
-});
-
-const material = new THREE.PointsMaterial({ 
-	size: .008,
-	color: 0xFF005D //red
-	// color: 0xff00dc // purple
-	// color: 0x5dff00 //green
-  });
-const particlesMaterial = new THREE.PointsMaterial({ 
+// Materials
+const torusMaterial = new THREE.PointsMaterial({ size: .008, color: 0xFF005D });
+const material = new THREE.PointsMaterial({ size: .008, color: 0xFF005D });
+const particlesMaterial = new THREE.PointsMaterial({
 	size: .009,
 	transparent: false,
-	// color: 0x2262c9,
 	color: 0x32befa,
 	map: sprite
-  });
-
+});
 particlesMaterial.opacity = 1;
 
-// geometry
-const geometry = new THREE.TorusGeometry( 13, 5, 25, 100 );
-const geometry2 = new THREE.BoxGeometry( 30, 30, 30 );
+// Geometry
+const geometry = new THREE.TorusGeometry(13, 5, 25, 100);
+const geometry2 = new THREE.BoxGeometry(30, 30, 30);
 
-const torus = new THREE.Points( geometry, torusMaterial );
-scene.add( torus );
-const cube = new THREE.Points( geometry2, material );
+const torus = new THREE.Points(geometry, torusMaterial);
+scene.add(torus);
+const cube = new THREE.Points(geometry2, material);
 
 // Light
-scene.add( new THREE.AmbientLight( 0x404040 ) );
+scene.add(new THREE.AmbientLight(0x404040));
 
-const pointLight = new THREE.PointLight( 0xffffff, 1 );
-camera.add( pointLight );
+const pointLight = new THREE.PointLight(0xffffff, 1);
+camera.add(pointLight);
 
-window.addEventListener( 'resize', onWindowResize, false );
+window.addEventListener('resize', onWindowResize, false);
 
-function onWindowResize(){            
+function onWindowResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
-	renderer.setSize( window.innerWidth, window.innerHeight );            
+	renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-//particles
+// Particles
 const particleGeometry = new THREE.BufferGeometry;
 const particlesCount = 60000;
 const posArray = new Float32Array(particlesCount * 3);
 
-for(let i = 0; i < particlesCount * 3; i++) {
-	posArray[i] = (math.random() - 0.5) * 360;
+for (let i = 0; i < particlesCount * 3; i++) {
+	posArray[i] = (Math.random() - 0.5) * 360;
 }
 
 particleGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 const particlesMesh = new THREE.Points(particleGeometry, particlesMaterial);
-scene.add( cube, particlesMesh );
+scene.add(cube, particlesMesh);
 
 const params = {
 	exposure: 1,
@@ -99,31 +86,41 @@ const params = {
 	bloomRadius: 0.25
 };
 
-const renderScene = new THREE.RenderPass( scene, camera );
-
-const bloomPass = new THREE.UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
+const renderScene = new THREE.RenderPass(scene, camera);
+const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
 bloomPass.threshold = params.bloomThreshold;
 bloomPass.strength = params.bloomStrength;
 bloomPass.radius = params.bloomRadius;
 
-composer = new THREE.EffectComposer( renderer );
-composer.addPass( renderScene );
-composer.addPass( bloomPass );
+const composer = new THREE.EffectComposer(renderer);
+composer.addPass(renderScene);
+composer.addPass(bloomPass);
 
-//mouse
+// Mouse & Touch Event Listeners
 document.addEventListener('mousemove', animateParticles);
-document.addEventListener('wheel', onDocumentMouseWheel); // camera.updateProjectionMatrix seems to break in firefox
+document.addEventListener('wheel', onDocumentMouseWheel);
 document.addEventListener('mousedown', onDocumentMouseDown);
 document.addEventListener('mouseup', onDocumentMouseUp);
 
+// Mobile Touch Support
+document.addEventListener('touchmove', (event) => {
+	let touch = event.touches[0];
+	animateParticles({ clientX: touch.clientX, clientY: touch.clientY });
+});
+
+document.addEventListener('touchstart', onDocumentMouseDown);
+document.addEventListener('touchend', onDocumentMouseUp);
+
 let mouseX = 0;
 let mouseY = 0;
+let trails = false;
 
 function onDocumentMouseWheel(event) {
 	var fovMAX = 120;
 	var fovMIN = 10;
-	camera.fov -= event.wheelDeltaY * 0.02;
-	camera.fov = Math.max( Math.min( camera.fov, fovMAX ), fovMIN );
+	let delta = event.deltaY || event.wheelDelta || -event.detail;
+	camera.fov -= delta * 0.02;
+	camera.fov = Math.max(Math.min(camera.fov, fovMAX), fovMIN);
 	camera.updateProjectionMatrix();
 }
 
@@ -133,65 +130,65 @@ function animateParticles(event) {
 }
 
 function onDocumentMouseDown(event) {
-	renderer.autoClearColor = true; // no trails 
-	fadeMesh.position.z = -0.02;	  
+	trails = true;
+	renderer.autoClearColor = false; // Enable trails
+	renderer.setClearColor(0x000000, 1);
+	fadeMesh.position.z = -0.12;
 }
 
-var trails = false;
 function onDocumentMouseUp(event) {
-	if(trails == false) {
-		renderer.autoClearColor = false; // trails
-		renderer.setClearColor(0x00000, 1); 
-		fadeMesh.position.z = -0.12;
-		trails = true;
-	}
-	else {
-		renderer.autoClearColor = true; // no trails 
-		fadeMesh.position.z = -0.02;
-		trails = false;
-	}
+	trails = false;
+	renderer.autoClearColor = true; // Disable trails
+	fadeMesh.position.z = -0.02;
 }
 
-function onDocumentClick(event) {
-	if(trails == false) {
-		renderer.autoClearColor = false; // trails
-		renderer.setClearColor(0x00000, 1); 
-		trails = true;
+// Color Switching
+const colors = [0xFF005D, 0xff00dc, 0x5dff00, 0x2262c9]; // Red, Purple, Green, Blue
+let colorIndex = 0;
+
+// Desktop: Press 'c' to switch colors
+document.addEventListener('keydown', (event) => {
+	if (event.key === 'c') {
+		switchColors();
 	}
-	else {
-		renderer.autoClearColor = true; // no trails 
-		fadeMesh.position.z = -0.02;
-		trails = false;
-	}
+});
+
+// Mobile: Double-tap to switch colors
+document.addEventListener('dblclick', switchColors);
+
+function switchColors() {
+	torus.material.color.set(colors[colorIndex % colors.length]);
+	cube.material.color.set(colors[(colorIndex + 1) % colors.length]);
+	particlesMesh.material.color.set(colors[(colorIndex + 2) % colors.length]);
+
+	colorIndex++;
 }
 
 const clock = new THREE.Clock();
-const elapsedTime = clock.getElapsedTime;
-
 camera.fov = 100;
 
 const animate = function () {
-	requestAnimationFrame( animate );
-	// Objects
+	requestAnimationFrame(animate);
+
+	// Object rotations
 	torus.rotation.y += 0.01;
 	cube.rotation.x += 0.01;
 	cube.rotation.y -= 0.01;
 
-	// starfield
-	if (trails == false) {
-		particlesMesh.rotation.y = mouseX * .0009;
-		particlesMesh.rotation.x = mouseY * .0009;
-	}
-	else {
+	if (trails) {
 		particlesMesh.rotation.x += 0.001;
 		particlesMesh.rotation.y += 0.001;
-		cube.rotation.x = mouseY * .0012;
-		cube.rotation.y = mouseX * .0012;
+		cube.rotation.x = mouseY * 0.0012;
+		cube.rotation.y = mouseX * 0.0012;
+	} else {
+		particlesMesh.rotation.y = mouseX * 0.0009;
+		particlesMesh.rotation.x = mouseY * 0.0009;
 	}
 
-	//zoom
-	camera.fov -= .05;
+	// Zoom effect
+	camera.fov -= 0.05;
 	camera.updateProjectionMatrix();
 	composer.render();
 };
+
 animate();
