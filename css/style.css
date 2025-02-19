@@ -67,7 +67,8 @@ h1, h2, p {
 	left: 0;
 	width: 100%;
 	border-bottom: 1px solid #ffffff;;
-	transform: scaleX(1);
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
 }
 
 
