@@ -16,6 +16,10 @@ body {
 	color: #ffffff;
 	font-family: Arial, Helvetica, sans-serif;
 	position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 body h1 {
@@ -24,6 +28,10 @@ body h1 {
 
 body p {
 	cursor: pointer;
+}
+
+h1, h2, p { 
+    touch-action: manipulation;
 }
 
 .webgl {
