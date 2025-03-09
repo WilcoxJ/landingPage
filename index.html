@@ -51,9 +51,10 @@
 
 		document.getElementById("role").addEventListener("click", enableTrails);
 		document.getElementById("name").addEventListener("click", switchColors);
+
 		if( /Android|webOS|iPhone|iPad|Mac|Macintosh|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
 		{
-			enableTrails;
+			enableTrails();
 		}
 	</script>
 	</body>
